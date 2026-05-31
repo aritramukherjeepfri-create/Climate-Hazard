@@ -167,18 +167,18 @@ _STATIC_DIR = Path(__file__).parent / "static"
 if _STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
 
-@app.get("/", include_in_schema=False)
+@app.get("/", include_in_schema=False, response_model=None)
 def serve_index() -> Union[FileResponse, dict]:
     index = _STATIC_DIR / "index.html"
     if index.exists():
         return FileResponse(str(index))
     return {
-        "message": "Progyan API is running",
+        "project": "Progyan — DiCRA Climate Sensor",
+        "status": "operational",
         "docs": "/docs",
         "health": "/api/v1/health",
         "blocks": "/api/v1/blocks",
     }
-
 
 # ─────────────────────────────────────────────────────────
 # CONSTANTS
