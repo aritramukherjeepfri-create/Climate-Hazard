@@ -319,13 +319,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
     </div>
   </div>
 
-  <div class="stats-bar">
-    <div class="sbar-item"><div class="sbar-val" id="sb-blocks">—</div><div class="sbar-lbl">CD Blocks</div></div>
-    <div class="sbar-item"><div class="sbar-val" id="sb-chi">—</div><div class="sbar-lbl">Mean District CHI</div></div>
-    <div class="sbar-item"><div class="sbar-val" id="sb-crit" style="color:var(--red)">—</div><div class="sbar-lbl">Critical Blocks (&gt;0.70)</div></div>
-    <div class="sbar-item"><div class="sbar-val">2025–2050</div><div class="sbar-lbl">Projection Horizon</div></div>
-    <div class="sbar-item"><div class="sbar-val" id="sb-models">4</div><div class="sbar-lbl">CMIP6 Models</div></div>
-  </div>
+
 
   <div class="reg-wrap">
     <div class="reg-card">
@@ -393,10 +387,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
         </div>
 
         <button class="reg-btn" id="reg-go" onclick="enterDash()">View My Dashboard →</button>
-        <div class="reg-note">
-          No account needed. Data sourced from IMD and NEX-GDDP-CMIP6 — fully open.<br>
-          <strong>Scalable to all India</strong> — add a new district by uploading its data files.
-        </div>
+
       </div>
     </div>
   </div>
@@ -601,7 +592,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;heigh
 // ════════════════════════════════════════════════════════
 const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
   ? 'http://localhost:8000'
-  : 'https://climate-hazard.onrender.com';   // ← replace with your Render URL
+  : 'https://climate-hazard.onrender.com';
 
 // ════════════════════════════════════════════════════════
 // STATE
@@ -613,14 +604,29 @@ let trendChart=null, racsChart=null, expChart=null;
 // ════════════════════════════════════════════════════════
 // BOOT
 // ════════════════════════════════════════════════════════
+// Hardcoded geography — West Bengal / South 24 Parganas / 29 CD Blocks
+const GEO = {
+  states:[{
+    state:'West Bengal',
+    districts:[{
+      district:'South 24 Parganas',
+      status:'live',
+      blocks:['Baruipur','Basanti','Bhangar-I','Bhangar-II','Bishnupur-I','Bishnupur-II',
+              'Budge Budge-I','Budge Budge-II','Canning-I','Canning-II',
+              'Diamond Harbour-I','Diamond Harbour-II','Falta','Gosaba',
+              'Jaynagar-I','Jaynagar-II','Kak Dwip','Kulpi','Kultali',
+              'Magra Hat-I','Magra Hat-II','Mandirbazar','Mathurapur I','Mathurapur-II',
+              'Namkhana','Pathar Pratima','Sagar','Sonarpur','Thakurpukur Mahestola']
+    }]
+  }]
+};
+
 async function boot(){
   const steps=[
     [10,'Connecting to API…',      ()=>apiFetch('/api/v1/health').catch(()=>{})],
-    [35,'Loading geography…',      ()=>apiFetch('/api/v1/geography').then(d=>{geoData=d;})],
-    [60,'Loading district stats…', ()=>apiFetch('/api/v1/district/summary?scenario=ssp245').then(d=>{districtSummary=d;})],
+    [55,'Loading district stats…', ()=>apiFetch('/api/v1/district/summary?scenario=ssp245').then(d=>{districtSummary=d;})],
     [80,'Loading trend data…',     ()=>apiFetch('/api/v1/trend').then(d=>{trendData=d;})],
-    [95,'Preparing interface…',    ()=>{ buildGeography(); updateLandingStats(); }],
-    [100,'Ready.',                 ()=>{}],
+    [100,'Ready.',                 ()=>{ geoData=GEO; buildGeography(); }],
   ];
   for(const [pct,msg,fn] of steps){
     setLd(msg,pct); try{ await fn(); }catch(e){ console.warn(msg,e); } await wait(150);
@@ -642,7 +648,6 @@ function fadeOut(id){document.getElementById(id).style.opacity='0';}
 // LANDING
 // ════════════════════════════════════════════════════════
 function buildGeography(){
-  // State dropdown — built from API, not hardcoded
   const stSel=document.getElementById('in-state');
   stSel.innerHTML='<option value="">— Select State —</option>';
   (geoData.states||[]).forEach(s=>{
@@ -650,7 +655,7 @@ function buildGeography(){
     o.value=s.state; o.textContent=s.state;
     stSel.appendChild(o);
   });
-  if(geoData.states?.length===1) stSel.value=geoData.states[0].state;
+  if(geoData.states?.length===1){ stSel.value=geoData.states[0].state; }
   loadDistricts();
 }
 
@@ -688,11 +693,6 @@ function loadBlocksForDistrict(){
   });
 }
 
-function updateLandingStats(){
-  document.getElementById('sb-blocks').textContent = districtSummary.n_blocks||'—';
-  document.getElementById('sb-chi').textContent    = districtSummary.chi_mean?.toFixed(3)||'—';
-  document.getElementById('sb-crit').textContent   = districtSummary.critical_blocks||'—';
-}
 
 function setPer(p,el){
   persona=p;
