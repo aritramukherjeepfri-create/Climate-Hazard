@@ -158,13 +158,25 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://climate-hazard.vercel.app/"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["GET", "POST", "OPTIONS", "HEAD"],
     allow_headers=["*"],
     expose_headers=["*"],
     max_age=86400,
 )
+from fastapi.responses import JSONResponse
 
+@app.options("/{path:path}")
+async def handle_options(path: str):
+    return JSONResponse(
+        content={"ok": True},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Max-Age": "86400",
+        }
+    )
 # Serve static frontend if present
 _STATIC_DIR = Path(__file__).parent / "static"
 if _STATIC_DIR.exists():
