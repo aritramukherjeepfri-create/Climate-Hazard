@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.*
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+# Don't gitignore data/ — JSON files are generated at build time on Render
+# If you want to pre-generate and commit them, remove the line below
+# data/
+feedback_log.jsonl

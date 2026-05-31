@@ -1,0 +1,88 @@
+block_name,typical_sowing_start,typical_sowing_end,cropping_pattern,salinity_level,livelihood_type
+Baruipur,March,April,Aus rice + jute,Low,Agriculture
+Baruipur,June,July,Aman rice + wheat/mustard/potato,Low,Agriculture
+Baruipur,November,December,Boro rice + potato + mustard + vegetables,Low,Agriculture
+Budge Budge-I,March,April,Aus rice + jute,Low,Agriculture
+Budge Budge-I,June,July,Aman rice + wheat/mustard/potato,Low,Agriculture
+Budge Budge-I,November,December,Boro rice + potato + mustard + vegetables,Low,Agriculture
+Budge Budge-II,March,April,Aus rice + jute,Low,Agriculture
+Budge Budge-II,June,July,Aman rice + wheat/mustard/potato,Low,Agriculture
+Budge Budge-II,November,December,Boro rice + potato + mustard + vegetables,Low,Agriculture
+Diamond Harbour-I,March,April,Aus rice + jute,Low,Agriculture
+Diamond Harbour-I,June,July,Aman rice + wheat/mustard/potato,Low,Agriculture
+Diamond Harbour-I,November,December,Boro rice + potato + mustard + vegetables,Low,Agriculture
+Diamond Harbour-II,March,April,Aus rice + jute,Low,Agriculture
+Diamond Harbour-II,June,July,Aman rice + wheat/mustard/potato,Low,Agriculture
+Diamond Harbour-II,November,December,Boro rice + potato + mustard + vegetables,Low,Agriculture
+Falta,March,April,Aus rice + jute,Low,Agriculture
+Falta,June,July,Aman rice + wheat/mustard/potato,Low,Agriculture
+Falta,November,December,Boro rice + potato + mustard + vegetables,Low,Agriculture
+Jaynagar-I,March,April,Aus rice + jute,Low,Agriculture
+Jaynagar-I,June,July,Aman rice + wheat/mustard/potato,Low,Agriculture
+Jaynagar-I,November,December,Boro rice + potato + mustard + vegetables,Low,Agriculture
+Jaynagar-II,March,April,Aus rice + jute,Low,Agriculture
+Jaynagar-II,June,July,Aman rice + wheat/mustard/potato,Low,Agriculture
+Jaynagar-II,November,December,Boro rice + potato + mustard + vegetables,Low,Agriculture
+Sonarpur,March,April,Aus rice + jute,Low,Agriculture
+Sonarpur,June,July,Aman rice + wheat/mustard/potato,Low,Agriculture
+Sonarpur,November,December,Boro rice + potato + mustard + vegetables,Low,Agriculture
+Thakurpukur Mahestola,March,April,Aus rice + jute,Low,Agriculture
+Thakurpukur Mahestola,June,July,Aman rice + wheat/mustard/potato,Low,Agriculture
+Thakurpukur Mahestola,November,December,Boro rice + potato + mustard + vegetables,Low,Agriculture
+Bhangar-I,March,April,Aus rice + jute,Moderate,Agriculture + Pisciculture
+Bhangar-I,June,July,Aman rice + mustard (post-harvest),Moderate,Agriculture + Pisciculture
+Bhangar-I,November,December,Boro rice + potato/mustard/vegetables,Moderate,Agriculture + Pisciculture
+Bhangar-II,March,April,Aus rice + jute,Moderate,Agriculture + Pisciculture
+Bhangar-II,June,July,Aman rice + mustard (post-harvest),Moderate,Agriculture + Pisciculture
+Bhangar-II,November,December,Boro rice + potato/mustard/vegetables,Moderate,Agriculture + Pisciculture
+Bishnupur-I,March,April,Aus rice + jute,Moderate,Agriculture + Pisciculture
+Bishnupur-I,June,July,Aman rice + mustard (post-harvest),Moderate,Agriculture + Pisciculture
+Bishnupur-I,November,December,Boro rice + potato/mustard/vegetables,Moderate,Agriculture + Pisciculture
+Bishnupur-II,March,April,Aus rice + jute,Moderate,Agriculture + Pisciculture
+Bishnupur-II,June,July,Aman rice + mustard (post-harvest),Moderate,Agriculture + Pisciculture
+Bishnupur-II,November,December,Boro rice + potato/mustard/vegetables,Moderate,Agriculture + Pisciculture
+Kulpi,March,April,Aus rice + jute,Moderate,Agriculture + Pisciculture
+Kulpi,June,July,Aman rice + mustard (post-harvest),Moderate,Agriculture + Pisciculture
+Kulpi,November,December,Boro rice + potato/mustard/vegetables,Moderate,Agriculture + Pisciculture
+Magra Hat-I,March,April,Aus rice + jute,Moderate,Agriculture + Pisciculture
+Magra Hat-I,June,July,Aman rice + mustard (post-harvest),Moderate,Agriculture + Pisciculture
+Magra Hat-I,November,December,Boro rice + potato/mustard/vegetables,Moderate,Agriculture + Pisciculture
+Magra Hat-II,March,April,Aus rice + jute,Moderate,Agriculture + Pisciculture
+Magra Hat-II,June,July,Aman rice + mustard (post-harvest),Moderate,Agriculture + Pisciculture
+Magra Hat-II,November,December,Boro rice + potato/mustard/vegetables,Moderate,Agriculture + Pisciculture
+Mandirbazar,March,April,Aus rice + jute,Moderate,Agriculture + Pisciculture
+Mandirbazar,June,July,Aman rice + mustard (post-harvest),Moderate,Agriculture + Pisciculture
+Mandirbazar,November,December,Boro rice + potato/mustard/vegetables,Moderate,Agriculture + Pisciculture
+Mathurapur I,March,April,Aus rice + jute,Moderate,Agriculture + Pisciculture
+Mathurapur I,June,July,Aman rice + mustard (post-harvest),Moderate,Agriculture + Pisciculture
+Mathurapur I,November,December,Boro rice + potato/mustard/vegetables,Moderate,Agriculture + Pisciculture
+Mathurapur-II,March,April,Aus rice + jute,Moderate,Agriculture + Pisciculture
+Mathurapur-II,June,July,Aman rice + mustard (post-harvest),Moderate,Agriculture + Pisciculture
+Mathurapur-II,November,December,Boro rice + potato/mustard/vegetables,Moderate,Agriculture + Pisciculture
+Basanti,March,April,Salt-tolerant Aus rice + pulse,High,Agriculture + Pisciculture
+Basanti,June,July,"Salt-tolerant Aman rice (RS-20, Tijai)",High,Agriculture + Pisciculture
+Basanti,November,December,Boro rice (salt-tolerant) + pisciculture,High,Agriculture + Pisciculture
+Canning-I,March,April,Salt-tolerant Aus rice + pulse,High,Agriculture + Pisciculture
+Canning-I,June,July,"Salt-tolerant Aman rice (RS-20, Tijai)",High,Agriculture + Pisciculture
+Canning-I,November,December,Boro rice (salt-tolerant) + pisciculture,High,Agriculture + Pisciculture
+Canning-II,March,April,Salt-tolerant Aus rice + pulse,High,Agriculture + Pisciculture
+Canning-II,June,July,"Salt-tolerant Aman rice (RS-20, Tijai)",High,Agriculture + Pisciculture
+Canning-II,November,December,Boro rice (salt-tolerant) + pisciculture,High,Agriculture + Pisciculture
+Gosaba,March,April,Salt-tolerant Aus rice + pulse,High,Agriculture + Pisciculture
+Gosaba,June,July,"Salt-tolerant Aman rice (RS-20, Tijai)",High,Agriculture + Pisciculture
+Gosaba,November,December,Boro rice (salt-tolerant) + pisciculture,High,Agriculture + Pisciculture
+Kak Dwip,March,April,Salt-tolerant Aus rice + pulse,High,Agriculture + Pisciculture
+Kak Dwip,June,July,"Salt-tolerant Aman rice (RS-20, Tijai)",High,Agriculture + Pisciculture
+Kak Dwip,November,December,Boro rice (salt-tolerant) + pisciculture,High,Agriculture + Pisciculture
+Kultali,March,April,Salt-tolerant Aus rice + pulse,High,Agriculture + Pisciculture
+Kultali,June,July,"Salt-tolerant Aman rice (RS-20, Tijai)",High,Agriculture + Pisciculture
+Kultali,November,December,Boro rice (salt-tolerant) + pisciculture,High,Agriculture + Pisciculture
+Namkhana,March,April,Salt-tolerant Aus rice + pulse,High,Agriculture + Pisciculture
+Namkhana,June,July,"Salt-tolerant Aman rice (RS-20, Tijai)",High,Agriculture + Pisciculture
+Namkhana,November,December,Boro rice (salt-tolerant) + pisciculture,High,Agriculture + Pisciculture
+Pathar Pratima,March,April,Salt-tolerant Aus rice + pulse,High,Agriculture + Pisciculture
+Pathar Pratima,June,July,"Salt-tolerant Aman rice (RS-20, Tijai)",High,Agriculture + Pisciculture
+Pathar Pratima,November,December,Boro rice (salt-tolerant) + pisciculture,High,Agriculture + Pisciculture
+Sagar,March,April,Salt-tolerant Aus rice + pulse,High,Agriculture + Pisciculture
+Sagar,June,July,"Salt-tolerant Aman rice (RS-20, Tijai)",High,Agriculture + Pisciculture
+Sagar,November,December,Boro rice (salt-tolerant) + pisciculture,High,Agriculture + Pisciculture

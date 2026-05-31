@@ -1,0 +1,15 @@
+# Render deployment configuration for Progyan Backend
+services:
+  - type: web
+    name: progyan-backend
+    env: python
+    buildCommand: "bash build.sh"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: DATA_PATH
+        value: ./data
+      - key: PYTHON_VERSION
+        value: "3.11"   # 3.14 does not exist; Render supports 3.11 on free tier
+    healthCheckPath: /api/v1/health
+    # Free tier: 512 MB RAM, 0.1 vCPU
+    # block_summary.json (~1.7 MB) + trend_data.json load entirely in memory — fine
