@@ -157,9 +157,12 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["climate-hazard-b3ikxdume-aritra-s-projectsstack.vercel.app"],
+    allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=86400,
 )
 
 # Serve static frontend if present
