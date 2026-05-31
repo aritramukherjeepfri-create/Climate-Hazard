@@ -108,13 +108,18 @@ def _load_meta():
         store.run_meta = {"note": "metadata.json not found"}
 
 @app.on_event("startup")
-def startup():
-    print(f"\n📂 Loading data from: {DATA_DIR.resolve()}")
-    _load_block_summary()
-    _load_block_metadata()
-    _load_trend()
-    _load_meta()
-    print(f"✅ Startup complete. {len(store.block_names)} blocks ready.\n")
+def _load_json(filename):
+    # Construct the full path
+    path = os.path.join(DATA_DIR, filename)
+    
+    # ADD THIS CHECK:
+    if not os.path.exists(path):
+        print(f"⚠️ Warning: {filename} is missing. Skipping load.")
+        return None  # Or return an empty structure like {} or []
+    
+    # Your existing code follows here
+    with open(path, 'r') as f:
+        return json.load(f)
 
 # ─────────────────────────────────────────────────────────
 # ADVISORY ENGINE
