@@ -1,0 +1,10 @@
+.python-version
+requirements.txt
+pyproject.toml
+poetry.lock
+uv.lock
+Pipfile
+Pipfile.lock
+main.py
+render.yaml
+data/
