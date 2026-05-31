@@ -623,14 +623,48 @@ const GEO = {
 
 async function boot(){
   const steps=[
-    [10,'Connecting to API…',      ()=>apiFetch('/api/v1/health').catch(()=>{})],
+    [10,'Connecting to API…',      ()=>apiFetch('/api/v1/health')],
     [55,'Loading district stats…', ()=>apiFetch('/api/v1/district/summary?scenario=ssp245').then(d=>{districtSummary=d;})],
     [80,'Loading trend data…',     ()=>apiFetch('/api/v1/trend').then(d=>{trendData=d;})],
-    [100,'Ready.',                 ()=>{ geoData=GEO; buildGeography(); }],
+    [100,'Ready.',                 ()=>{ geoData=GEO; buildGeography(); updateLandingStats(); }],
   ];
+  
+  let failed = false;
   for(const [pct,msg,fn] of steps){
-    setLd(msg,pct); try{ await fn(); }catch(e){ console.warn(msg,e); } await wait(150);
+    setLd(msg,pct);
+    try { 
+      await fn(); 
+    } catch(e){ 
+      console.error('Boot step failed:', msg, e);
+      failed = true;
+      document.getElementById('ldm').textContent = 'Error: ' + e.message;
+      document.getElementById('ldm').style.color = '#ef4444';
+      document.getElementById('ldf').style.width = '100%';
+      document.getElementById('ldf').style.background = '#ef4444';
+      // Show error overlay after 2s
+      setTimeout(() => {
+        document.getElementById('loader').innerHTML = `
+          <div style="text-align:center;max-width:400px;padding:2rem;">
+            <div style="font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:1rem;">⚠️ Connection Failed</div>
+            <div style="color:rgba(255,255,255,.7);font-size:.9rem;line-height:1.6;margin-bottom:1.5rem;">
+              Could not connect to the API at <code style="background:rgba(255,255,255,.1);padding:2px 6px;border-radius:4px;">${API}</code><br><br>
+              <strong>Error:</strong> ${e.message}<br><br>
+              Common causes:<br>
+              • Render backend is spinning up (free tier sleeps after 15 min)<br>
+              • CORS blocked the request<br>
+              • API URL is incorrect
+            </div>
+            <button onclick="location.reload()" style="background:var(--teal);color:#fff;border:none;padding:.6rem 1.2rem;border-radius:6px;font-weight:700;cursor:pointer;">Retry</button>
+          </div>
+        `;
+      }, 1500);
+      break;
+    }
+    await wait(150);
   }
+  
+  if(failed) return;
+  
   await wait(300);
   fadeOut('loader'); await wait(450);
   document.getElementById('loader').style.display='none';
