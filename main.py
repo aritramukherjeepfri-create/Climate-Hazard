@@ -26,7 +26,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-
+from fastapi.responses import JSONResponse, FileResponse
 # ─────────────────────────────────────────────────────────
 # LOGGING
 # ─────────────────────────────────────────────────────────
@@ -155,28 +155,33 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["https://climate-hazard.vercel.app/"],
-    allow_credentials=False,
-    allow_methods=["GET", "POST", "OPTIONS", "HEAD"],
-    allow_headers=["*"],
-    expose_headers=["*"],
-    max_age=86400,
-)
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 
-@app.options("/{path:path}")
-async def handle_options(path: str):
-    return JSONResponse(
-        content={"ok": True},
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD",
-            "Access-Control-Allow-Headers": "*",
-            "Access-Control-Max-Age": "86400",
-        }
-    )
+# ── CORS MIDDLEWARE (raw — more reliable than CORSMiddleware) ──
+@app.middleware("http")
+async def cors_middleware(request, call_next):
+    # Handle preflight OPTIONS immediately
+    if request.method == "OPTIONS":
+        return JSONResponse(
+            content={"ok": True},
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD",
+                "Access-Control-Allow-Headers": "*",
+                "Access-Control-Max-Age": "86400",
+            }
+        )
+    
+    # Process actual request
+    response = await call_next(request)
+    
+    # Add CORS headers to all responses
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS, HEAD"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Max-Age"] = "86400"
+    
+    return response
 # Serve static frontend if present
 _STATIC_DIR = Path(__file__).parent / "static"
 if _STATIC_DIR.exists():
