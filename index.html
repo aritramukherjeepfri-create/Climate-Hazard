@@ -626,7 +626,7 @@ async function boot(){
     [10,'Connecting to API…',      ()=>apiFetch('/api/v1/health')],
     [55,'Loading district stats…', ()=>apiFetch('/api/v1/district/summary?scenario=ssp245').then(d=>{districtSummary=d;})],
     [80,'Loading trend data…',     ()=>apiFetch('/api/v1/trend').then(d=>{trendData=d;})],
-    [100,'Ready.',                 ()=>{ geoData=GEO; buildGeography(); updateLandingStats(); }],
+    [100,'Ready.', ()=>{ geoData=GEO; buildGeography(); }],
   ];
   
   let failed = false;
