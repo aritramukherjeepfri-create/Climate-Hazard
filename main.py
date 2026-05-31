@@ -36,7 +36,7 @@ log = logging.getLogger(__name__)
 # ─────────────────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────────────────
-DATA_PATH = os.getenv("DATA_PATH", "./data")
+DATA_PATH = os.getenv("DATA_PATH", str(Path(__file__).parent))
 DATA_DIR  = Path(DATA_PATH)
 
 # ─────────────────────────────────────────────────────────
