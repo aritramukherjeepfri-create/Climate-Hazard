@@ -1,0 +1,31 @@
+{
+  "district": "South 24 Parganas",
+  "state": "West Bengal",
+  "country": "India",
+  "data_year": "2030 representative (2028-2032 mean)",
+  "baseline": "IMD 1985-2014",
+  "climate_model": "NEX-GDDP-CMIP6 ensemble",
+  "scenarios": [
+    "ssp126",
+    "ssp245",
+    "ssp585"
+  ],
+  "spatial_resolution_deg": 0.009,
+  "bounding_box": {
+    "lat_min": 21.5361,
+    "lat_max": 22.6161,
+    "lon_min": 88.0186,
+    "lon_max": 88.9636
+  },
+  "chi_components": [
+    "heatwave_prob",
+    "drought_prob",
+    "flood_prob",
+    "extreme_precip_prob",
+    "cyclone_prob",
+    "landslide_prob"
+  ],
+  "chi_formula": "Composite Hazard Index (CHI) = weighted combination of normalised hazard probabilities; weights calibrated to South 24 Parganas agro-climatic vulnerability profile.",
+  "generated_at": "2026-05-31T04:36:56.973033+00:00",
+  "pipeline_version": "1.1.0"
+}
