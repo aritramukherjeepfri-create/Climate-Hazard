@@ -768,7 +768,7 @@ function enterDash(){
   const name=document.getElementById('in-name').value.trim();
   if(!name){document.getElementById('en').style.display='block';ok=false;}else document.getElementById('en').style.display='none';
   const phone=document.getElementById('in-phone').value.replace(/\D/g,'');
-  if(phone.length<10){document.getElementById('ephone').style.display='block';ok=false;}else document.getElementById('ephone').style.display='none';
+  if(phone.length<<10){document.getElementById('ephone').style.display='block';ok=false;}else document.getElementById('ephone').style.display='none';
   const blk=document.getElementById('in-block').value;
   if(!blk){document.getElementById('eblock').style.display='block';ok=false;}else document.getElementById('eblock').style.display='none';
   if(!ok) return;
@@ -779,10 +779,23 @@ function enterDash(){
   document.getElementById('landing').style.display='none';
   document.getElementById('dash').style.display='flex';
 
-  // Activate persona tab
-  switchV(persona, document.getElementById('nv-'+persona));
+  // Show only selected persona's nav button and view
+  document.querySelectorAll('.nv').forEach(btn => {
+    btn.style.display = (btn.id === 'nv-' + persona) ? 'inline-flex' : 'none';
+  });
+  
+  // Activate only the selected persona's view
+  document.querySelectorAll('.vw').forEach(v => v.classList.remove('on'));
+  document.getElementById('vw-' + persona).classList.add('on');
+  
+  // Set active state on the visible button
+  const activeBtn = document.getElementById('nv-' + persona);
+  document.querySelectorAll('.nv').forEach(b => b.classList.remove('on'));
+  activeBtn.classList.add('on');
+
   initDash();
 }
+
 
 function goBack(){
   document.getElementById('dash').style.display='none';
