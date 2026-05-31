@@ -638,12 +638,22 @@ async function boot(){
 }
 
 async function apiFetch(path){
-  const r=await fetch(API+path); if(!r.ok) throw new Error(`HTTP ${r.status}`); return r.json();
+  try {
+    const r = await fetch(API + path, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    });
+    if (!r.ok) {
+      const txt = await r.text();
+      console.error(`API error ${r.status}:`, txt);
+      throw new Error(`HTTP ${r.status} - ${txt.slice(0,100)}`);
+    }
+    return r.json();
+  } catch (e) {
+    console.error('Fetch failed:', path, e.message);
+    throw e;
+  }
 }
-function setLd(m,p){document.getElementById('ldm').textContent=m;document.getElementById('ldf').style.width=p+'%';}
-function wait(ms){return new Promise(r=>setTimeout(r,ms));}
-function fadeOut(id){document.getElementById(id).style.opacity='0';}
-
 // ════════════════════════════════════════════════════════
 // LANDING
 // ════════════════════════════════════════════════════════
