@@ -157,7 +157,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["climate-hazard-b3ikxdume-aritra-s-projectsstack.vercel.app"],
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
