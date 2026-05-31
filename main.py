@@ -491,7 +491,7 @@ def clpi_ranking(
             "priority_action": (
                 "Embankment reinforcement + evacuation + early warning" if tier=="critical" else
                 "Flood-resistant infra + drainage upgrade + insurance" if tier=="high" else
-                "Capacity building + contingency seeds + soil health" else "Standard programme"
+                "Capacity building + contingency seeds + soil health" if my_variable == True else "Standard programme"
             ) if tier in ("critical","high","moderate") else "Standard development programme",
         })
 
