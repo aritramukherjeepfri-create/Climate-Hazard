@@ -19,8 +19,7 @@ from functools import lru_cache
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, FileResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 # ─────────────────────────────────────────────────────────
@@ -44,15 +43,6 @@ app.add_middleware(
     allow_methods=["GET","POST","OPTIONS"],
     allow_headers=["*"],
 )
-
-# ── Serve the Vercel frontend from /static (also serves / → index.html) ──
-_STATIC_DIR = Path(__file__).parent / "static"
-if _STATIC_DIR.exists():
-    app.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
-
-    @app.get("/", include_in_schema=False)
-    def serve_index():
-        return FileResponse(str(_STATIC_DIR / "index.html"))
 
 # ─────────────────────────────────────────────────────────
 # DATA LOADING  (loaded once at startup, held in memory)
@@ -88,10 +78,7 @@ def _load_block_metadata():
         print("  ⚠️  block_metadata.csv missing — advisory will use defaults")
         return
     with open(p, newline="", encoding="utf-8") as f:
-        # Support both tab and comma delimiters (block_metadata.csv may be TSV)
-        sample = f.read(1024); f.seek(0)
-        dialect = csv.Sniffer().sniff(sample, delimiters="\t,")
-        reader = csv.DictReader(f, dialect=dialect)
+        reader = csv.DictReader(f)
         for row in reader:
             name = row["block_name"].strip()
             if name not in store.block_meta:
@@ -367,7 +354,7 @@ def _clpi(chi: float, block_data: dict) -> float:
 # API ENDPOINTS
 # ─────────────────────────────────────────────────────────
 
-@app.get("/api/v1/info", tags=["health"])
+@app.get("/", tags=["health"])
 def root():
     return {
         "project": "Progyan — DiCRA Climate Sensor",
@@ -504,8 +491,8 @@ def clpi_ranking(
             "priority_action": (
                 "Embankment reinforcement + evacuation + early warning" if tier=="critical" else
                 "Flood-resistant infra + drainage upgrade + insurance" if tier=="high" else
-                "Capacity building + contingency seeds + soil health" if tier=="moderate" else "Standard programme"
-            ),
+                "Capacity building + contingency seeds + soil health" else "Standard programme"
+            ) if tier in ("critical","high","moderate") else "Standard development programme",
         })
 
     rows.sort(key=lambda r: r["clpi"], reverse=True)
