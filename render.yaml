@@ -2,7 +2,8 @@ services:
   - type: web
     name: progyan-backend
     env: python
-    buildCommand: pip install -r requirements.txt
+    # Change the buildCommand to run your script
+    buildCommand: "./build.sh" 
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: DATA_PATH
