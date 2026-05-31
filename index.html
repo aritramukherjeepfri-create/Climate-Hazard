@@ -688,6 +688,12 @@ async function apiFetch(path){
     throw e;
   }
 }
+function setLd(m,p){
+  document.getElementById('ldm').textContent=m;
+  document.getElementById('ldf').style.width=p+'%';
+}
+function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+function fadeOut(id){document.getElementById(id).style.opacity='0';}
 // ════════════════════════════════════════════════════════
 // LANDING
 // ════════════════════════════════════════════════════════
