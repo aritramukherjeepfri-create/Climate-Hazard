@@ -167,12 +167,17 @@ _STATIC_DIR = Path(__file__).parent / "static"
 if _STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
 
-    @app.get("/", include_in_schema=False)
-    def serve_index() -> FileResponse:
-        index = _STATIC_DIR / "index.html"
-        if not index.exists():
-            raise HTTPException(404, "index.html not found in static/")
+@app.get("/", include_in_schema=False)
+def serve_index() -> Union[FileResponse, dict]:
+    index = _STATIC_DIR / "index.html"
+    if index.exists():
         return FileResponse(str(index))
+    return {
+        "message": "Progyan API is running",
+        "docs": "/docs",
+        "health": "/api/v1/health",
+        "blocks": "/api/v1/blocks",
+    }
 
 
 # ─────────────────────────────────────────────────────────
