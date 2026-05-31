@@ -702,7 +702,18 @@ function buildGeography(){
   if(geoData.states?.length===1){ stSel.value=geoData.states[0].state; }
   loadDistricts();
 }
+function updateLandingStats(){
+  document.getElementById('sb-blocks').textContent = districtSummary.n_blocks || '—';
+  document.getElementById('sb-chi').textContent = districtSummary.chi_mean?.toFixed(3) || '—';
+  document.getElementById('sb-crit').textContent = districtSummary.critical_blocks || '—';
+}
 
+function setPer(p,el){
+  persona=p;
+  document.querySelectorAll('.pc').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('ep').style.display='none';
+}
 function loadDistricts(){
   const st=document.getElementById('in-state').value;
   const distSel=document.getElementById('in-dist');
