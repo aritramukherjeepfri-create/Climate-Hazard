@@ -169,7 +169,11 @@ if _STATIC_DIR.exists():
 
 @app.get("/", include_in_schema=False, response_model=None)
 def serve_index() -> Union[FileResponse, dict]:
+    # 1. Try static/index.html
     index = _STATIC_DIR / "index.html"
+    # 2. Fallback: index.html in same folder as main.py
+    if not index.exists():
+        index = Path(__file__).parent / "index.html"
     if index.exists():
         return FileResponse(str(index))
     return {
